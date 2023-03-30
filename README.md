@@ -1,0 +1,2 @@
+# smart_feeding
+本仓库是基于uniapp实现的智能宠物喂食小程序

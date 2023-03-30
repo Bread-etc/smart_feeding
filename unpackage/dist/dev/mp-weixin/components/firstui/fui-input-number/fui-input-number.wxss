@@ -1,0 +1,56 @@
+
+.fui-input__number.data-v-14981959 {
+
+	display: inline-flex;
+
+	flex-direction: row;
+	align-items: center;
+}
+.fui-number__minus.data-v-14981959 {
+	position: relative;
+
+	display: flex;
+
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.fui-minus__sign.data-v-14981959 {
+	height: 2px;
+	border-radius: 2px;
+}
+.fui-number__plus.data-v-14981959 {
+	position: relative;
+
+	display: flex;
+
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+.fui-plus__sign-col.data-v-14981959 {
+	position: absolute;
+	top: 0;
+
+
+
+
+
+	-webkit-transform: translateX(-50%);
+	        transform: translateX(-50%);
+
+	width: 2px;
+	border-radius: 2px;
+}
+.fui-plus__sign-row.data-v-14981959 {
+	height: 2px;
+	border-radius: 2px;
+}
+.fui-number__input.data-v-14981959 {
+	text-align: center;
+	font-weight: 500;
+}
+.fui-number__disabled.data-v-14981959 {
+	opacity: 0.6;
+}
+

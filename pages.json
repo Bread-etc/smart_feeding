@@ -1,0 +1,125 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+				
+			}
+		}
+	    ,{
+            "path" : "pages/info/info",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "主子档案",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/function/function",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "控制平台",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/addFood/addFood",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "精准加粮",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/addWater/addWater",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "定时换水",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/identify/identify",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "宠物智能识别",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/monitor/monitor",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "实时监控",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/addPet/addPet",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "添加宠物",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"tabBar": {
+		"color": "#b8c1c0",
+		"selectedColor": "#5b5b5d",
+		"backgroundColor": "white",
+		"list": [
+			{
+				"text": "首页",
+				"pagePath": "pages/index/index",
+				"iconPath": "static/images/ali-icon/home.png",
+				"selectedIconPath": "static/images/ali-icon/home-select.png"
+				
+			},
+			{
+				"text": "功能",
+				"pagePath": "pages/function/function",
+				"iconPath": "static/images/ali-icon/function.png",
+				"selectedIconPath": "static/images/ali-icon/function-select.png"
+			},
+			{
+				"text": "宠物信息",
+				"pagePath": "pages/info/info",
+				"iconPath": "static/images/ali-icon/info.png",
+				"selectedIconPath": "static/images/ali-icon/info-select.png"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "铲屎官平台",
+		"navigationBarBackgroundColor": "#333333",		//主色调:深灰色
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {},
+	// 下载安装时easycom配置
+	"easycom": {
+			"autoscan": true,
+			"custom": {
+				"fui-(.*)": "@/components/firstui/fui-$1/fui-$1.vue"
+			}
+		},
+	"condition" : { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [
+			{
+				"name": "", //模式名称
+				"path": "", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
+			}
+		]
+	}
+}
+

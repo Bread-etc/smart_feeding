@@ -1,0 +1,33 @@
+
+.device.data-v-439e9044{
+	margin-left: 15rpx;
+	margin-right: 15rpx;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	width: 720rpx;
+	height: 200rpx;
+	border-radius: 15px;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.addContent.data-v-439e9044{
+	margin-left: 50rpx;
+	height: 40rpx;
+}
+.addContent.data-v-439e9044:first-child{
+	line-height: 40rpx;
+}
+.addContent text.data-v-439e9044{
+	margin-left: 10rpx;
+	line-height: 40rpx;
+	font-weight: 500;
+	font-size: 35rpx;
+}
+.device image.data-v-439e9044{
+	width: 150rpx;
+	height: 150rpx;
+	margin-right: 20rpx;
+	margin-left: auto;
+}
+

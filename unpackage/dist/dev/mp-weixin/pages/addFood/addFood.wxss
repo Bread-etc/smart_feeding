@@ -1,0 +1,169 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 共用属性 */
+.addNow.data-v-0568af74,
+.addSetTime.data-v-0568af74,
+.addSmart.data-v-0568af74
+{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	font-size: 40rpx;
+}
+/* 共用属性 */
+.fui-input__number.data-v-0568af74{
+    display: inline-flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+/* 共用属性 */
+.addNow fui-button.data-v-0568af74,
+.addSetTime fui-button.data-v-0568af74,
+.addSmart fui-button.data-v-0568af74
+{
+	margin-top: 20rpx;
+}
+/* 共用属性 */
+.setTime.data-v-0568af74,
+.foodMaxium.data-v-0568af74,
+.addKg.data-v-0568af74,
+.addSmartMin.data-v-0568af74,
+.addSmartMax.data-v-0568af74
+{
+	display: inline-flex;
+}
+.item.data-v-0568af74{
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 20rpx;
+}
+
+

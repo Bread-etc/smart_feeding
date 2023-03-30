@@ -1,0 +1,11 @@
+
+.uploadPic{
+	display: flex;
+	flex-direction: column;
+	justify-items: center;
+}
+.uploadPic fui-button{
+	margin-bottom: 30rpx;
+	margin-top: 30rpx;
+}
+

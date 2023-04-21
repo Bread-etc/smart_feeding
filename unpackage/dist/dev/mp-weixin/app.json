@@ -6,7 +6,6 @@
     "pages/addFood/addFood",
     "pages/addWater/addWater",
     "pages/identify/identify",
-    "pages/monitor/monitor",
     "pages/addPet/addPet"
   ],
   "subPackages": [],

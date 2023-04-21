@@ -8,19 +8,16 @@
 </template>
 
 <script>
+	import store from '@/store/index.js'
 	export default {
 		data() {
 			return {
-				//提供设备接口信息
-				device:{
-					deviceUrl:"http://api.heclouds.com/devices/1055375296",		//设备ID
-					apiKey:"NWcyM=JHQsYGkSJgIjEzQnghAWY=",						//普通连接apikey
-					access_key:"zOGTZYEhToBYjKxKUyKlMey5AfGyM44jTQLb2zwzVN0=",	//安全连接apikey
-				},
+				device:{},
 			}
 		},
 		computed:{
 			deviceRequest(){
+				this.device = store.state.device		//获取设备信息 
 				return this.device
 			}
 		},

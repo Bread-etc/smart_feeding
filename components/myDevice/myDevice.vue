@@ -22,8 +22,8 @@
 		},
 		methods:{
 			isShow(){
-				this.data = store.state.data
-				return store.state.connectBoolean
+				this.data = store.state.data		//传入vuex中的data响应返回的JSON
+				return store.state.connectBoolean	//将展示状态返回给vuex
 			}
 		},
 		updated() {

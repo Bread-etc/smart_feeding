@@ -31,21 +31,55 @@
 	export default {
 		data() {
 			return {
-				water:50,
-				waterSurplus:store.state.restWater,		//将vuex中的食物剩余量传递到子组件
-				waterChangeTime:12,						//换水间隔时间
+				water:50,													//默认换水量
+				waterSurplus:store.state.dataStreams.surplus.restWater,		//将vuex中的食物剩余量传递到子组件
+				waterChangeTime:12,											//默认换水间隔时间
 			}
 		},
 		methods: {
 			addWaterNow(){
-				//发送网络请求添加食物
+				//发送网络请求换水
+				/*
+				uni.request({
+				    url: 'http://api.heclouds.com/cmds?device_id=1055375296',
+					method:'POST',
+				    data: { 'key':'OPEN' },
+				    header: {
+						"api-key":store.state.device.apiKey,
+				        "Content-Type": "application/x-www-form-urlencoded"
+				    }, 	//设置请求头更改为form-data
+				    success: res =>{
+				    	console.log(res);
+				    },
+					fail: err =>{
+						console.log(err);
+					}
+				})
+				*/
 				this.waterSurplus += this.water
-				store.commit('changeRestWater',this.waterSurplus)
+				store.commit('changeWater',this.waterSurplus)
 				console.log(this.waterSurplus);
 				return this.waterSurplus
 			},
 			addWaterSetTime(){
 				//发送网络请求定时换水
+				/*
+				uni.request({
+				    url: 'http://api.heclouds.com/cmds?device_id=1055375296',
+					method:'POST',
+				    data: { 'key':'OPEN' },
+				    header: {
+						"api-key":store.state.device.apiKey,
+				        "Content-Type": "application/x-www-form-urlencoded"
+				    }, 	//设置请求头更改为form-data
+				    success: res =>{
+				    	console.log(res);
+				    },
+					fail: err =>{
+						console.log(err);
+					}
+				})
+				*/
 				console.log('定时换水设置成功');
 			}
 		}

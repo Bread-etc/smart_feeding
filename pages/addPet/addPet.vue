@@ -5,16 +5,16 @@
 			<form @submit="formSubmit">
 				<uploadPic></uploadPic>
 				<view>
-					<view>姓名</view>
-					<input name="input" placeholder="这是一个输入框" />
+					<view>宠物名字:</view>
+					<input name="name" placeholder="请输入爱称" />
 				</view>
 				<view>
-					<view>出生年月</view>
-					<picker mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
+					<view>出生年月:</view>
+					<picker name="date" mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
 						<view class="uni-input">{{date}}</view>
 					</picker>
 				</view>
-				<button form-type="submit">111</button>
+				<button form-type="submit">确认</button>
 			</form>
 		</view>
 	</view>
@@ -27,7 +27,7 @@
 				format:true
 			})
 			return {
-				date:currentDate,			//当前时间
+				date:currentDate,					//当前时间
 			}
 		},
 		methods: {
@@ -38,13 +38,19 @@
 				let day = date.getDate();
 	
 				if (type === 'start') {
-					year = year - 60;
+					year = year - 30;				//开始时间（现在时间30年前）
 				} else if (type === 'end') {
-					year = year + 2;
+					year = year + 2;				//结束时间（现在时间两年后）
 				}
 				month = month > 9 ? month : '0' + month;
 				day = day > 9 ? day : '0' + day;
 				return `${year}-${month}-${day}`;
+			},
+			bindDateChange(e){
+				this.date = e.detail.value			//更改事件e的value
+			},
+			formSubmit(e){
+				console.log(e);
 			}
 		},
 		computed: {
@@ -59,5 +65,9 @@
 </script>
 
 <style>
-
+	.functionContent{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
 </style>

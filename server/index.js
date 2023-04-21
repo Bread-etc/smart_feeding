@@ -2,6 +2,25 @@ const express = require('express')
 const request = require('request')
 const bodyParser = require('body-parser')
 const app = express()
+//引入MongoDB
+const MongoClient = require('mongodb').MongoClient
+//定义数据库连接的地址
+const dbUrl = 'mongodb://userAdmin:12345g@localhost:27017/'
+
+MongoClient.connect(dbUrl, (err,client)=>{
+	if (err) {
+		console.log(err);
+		return
+	}
+	console.log("Connected successfully to server")
+	//定义需要操作的数据库
+	const db = client.db('userInfo')
+	const collection = db.collection('users')
+	//操作完数据库后，关闭数据库
+	client.close()
+})
+
+
 app.use(bodyParser.json())
 
 //开发者信息
@@ -19,12 +38,12 @@ var db = {
 
 //处理post请求
 app.post('/login',(req,res)=>{
-	console.log(req.body.code);
+	console.log('code:',req.body.code);
 	//code,appid,secret都有了就发起请求到微信接口服务校验
 	var url = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + wx.appid + '&secret=' + wx.secret + '&js_code=' + req.body.code + '&grant_type=authorization_code'
 	request(url,(err,response,body)=>{
 		//可以获取到 session_key(会话信息) openid(用户唯一标识)
-		console.log('body:' + body)
+		// console.log('body:' + body)
 		//上面的session信息是字符串数据，通过JSON.parse()转成js对象
 		var session = JSON.parse(body)
 		

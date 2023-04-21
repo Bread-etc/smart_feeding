@@ -4,38 +4,30 @@
 			token:null
 		},
 		methods:{
+			//实现微信无感登录，仅用于实现保持用户登录态
 			login(){
-				//当小程序开启时无感登录，获取用户登陆凭证code
 				uni.login({
 					success:res=>{
-						console.log('code',res.code);
-						if(res.code){
-							uni.request({
-								//请求方式
-								method:'POST',
-								//服务器接口地址
-								url:"http://127.0.0.1:3000/login",
-								data:{ code:res.code },
-								success:res=>{
-									//将请求成功的token打印
-									console.log("token:" + res.data.token);
-									
-									//将token保存为公共数据 （多页面->全局globaldata)
-									this.globalData.token = res.data.token
-									//将token保存在数据缓存中(下次登录无需重新获取token)
-									uni.setStorage({
-										key:'token',
-										data:res.data.token
-									})
-								}
-							})
-						}else{
-							console.log('登录失败!',res.errMsg);
-						}
-						console.log(res);
+						uni.request({
+							url:'http://127.0.0.1:3000/login',
+							method:'POST',
+							data:{ code:res.code },
+							success:res=>{
+								//将请求成功的token打印
+								console.log('token:',res.data.token);
+								//将token保存为全局数据（多页面使用->全局globalData)
+								this.globalData.token = res.data.token
+								//将token保存在数据缓存中(下次登录无需重新获取token)
+								uni.setStorage({
+									key:'token',
+									data:res.data.token
+								})
+							}
+						})
 					}
 				})
 			},
+			
 			checkLogin(callback){
 				let token = this.globalData.token
 				if(!token){
@@ -63,9 +55,9 @@
 			}
 		},
 		onLaunch: function() { 
-			//检测用户是否登录
+			//检测用户是否登录(无感登录)
 			this.checkLogin(res=>{
-				console.log('is_login:',res.is_login)
+				console.log('is_login:',res.is_login)		//is_login的值为undefined时返回
 				//未登录-->login()
 				if(!res.is_login){
 					//调用login()

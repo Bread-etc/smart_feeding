@@ -3,6 +3,7 @@
   "enablePullDownRefresh": false,
   "usingComponents": {
     "fui-divider": "/components/firstui/fui-divider/fui-divider",
+    "pet-card": "/components/petCard/petCard",
     "fui-card": "/components/firstui/fui-card/fui-card"
   }
 }

@@ -2,7 +2,6 @@
 	<view class="infoContent">
 		<view class="infoPic">
 			<image src="../../static/images/normal/addInfo.jpg" mode="aspectFill"></image>
-			<fui-button text="用户登录" background="#ecbd6b" width="350rpx" bold @click="getUserInfo"></fui-button>
 			<fui-button text="添加宠物" background="#ecbd6b" width="350rpx" bold @click="addPet"></fui-button>
 		</view>
 		
@@ -21,12 +20,9 @@
 				uni.navigateTo({
 					url:'/pages/addPet/addPet'
 				})
-			},
-			getUserInfo(event){
-				console.log('登录成功');
 			}
-			
 		}
+		
 	}
 </script>
 

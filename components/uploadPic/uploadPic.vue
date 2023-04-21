@@ -1,23 +1,8 @@
 <template>
-	<view class="uploadPic">
-		<uni-file-picker
-			v-model="imageValue" 
-			title="请选择一张图片" 
-			limit="1" 
-			file-mediatype="image"
-			fileExtname="png,jpg"
-			mode="grid"
-			@select="select"
-			@progress="progress"
-			@success="success"
-			@fail="fail"
-			:list-styles="listStyles"
-			:image-styles="imageStyles"
-			:autoUpload="false"
-			ref="files"
-		>
-		</uni-file-picker>
-		<fui-button text="上传图片" background="#ecbd6b" width="200rpx" @click="upload"></fui-button>
+	<view>
+		<fui-button text="选择图片" background="#ecbd6b" width="350rpx" height="80rpx" bold @click="chooseImage"></fui-button>
+		<image v-if="imageUrl" :src="imageUrl" mode="aspectFit" @click="previewImage"></image>
+		<fui-button v-if="imageUrl" text="删除照片" background="#ecbd6b" width="350rpx" height="80rpx" bold @click="deleteImage"></fui-button>
 	</view>
 </template>
 
@@ -27,53 +12,54 @@
 		name:"uploadPic",
 		data() {
 			return {
-				imageValue:[],
-				petPicUrl:'',
-				imageStyles:{
-					width:64,
-					height:64	
-				}
-			};
+				imageUrl:''
+			}
 		},
 		methods:{
-			// 获取上传状态
-			select(e){
-				console.log('选择文件：',e)
+			chooseImage(){
+				uni.chooseImage({
+					count:1,						//只能选择一张图片
+					sourceType:['album'],			//从相册选图
+					extension:['jpg','png'],		//后缀只有jpg和png
+					crop:{							//裁剪为64*64的图片
+						width:64,
+						height:64
+					},
+					success: res=>{
+						const tempFilePath = res.tempFilePaths[0]
+						this.uploadImage(tempFilePath)
+					},
+					fail: err=>{
+						console.error(err)
+					}
+				})
 			},
-			// 获取上传进度
-			progress(data){
-				console.log('上传进度：',data)
-				this.petPicUrl = data.tempFile.url		//存储上传头像的链接
-				console.log(this.petPicUrl);
-				store.commit('petPic',this.petPicUrl)		//更改vuex中petPicUrl数据
+			uploadImage(filePath){
+				uni.uploadFile({
+					url:'',		//开发者服务器地址
+					filePath:filePath,
+					name:'file',
+					success: res=>{
+						const data = JSON.parse(res.data)
+						this.imageUrl = data.url
+					},
+					fail: err=>{
+						console.error(err)
+					}
+				})
 			},
-			
-			// 上传成功
-			success(e){
-				console.log('上传成功')				
+			previewImage(){
+				uni.previewImage({
+					urls:[this.imageUrl]
+				})
 			},
-			
-			// 上传失败
-			fail(e){
-				console.log('上传失败：',e)
-			},
-			//手动上传图片
-			upload(){
-				this.$refs.files.upload()
+			deleteImage(){
+				this.imageUrl = ''
 			}
 		}
 	}
 </script>
 
 <style>
-	.uploadPic{
-		display: flex;
-		flex-direction: column;
-		justify-items: center;
-	}
 	
-	.uploadPic fui-button{
-		margin-bottom: 30rpx;
-		margin-top: 30rpx;
-	}
 </style>

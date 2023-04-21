@@ -5,43 +5,9 @@
 	width: 750rpx;
 	padding: 20rpx 0;
 }
-.petInfo.data-v-d355acf4{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	background-color: white;
-	margin: 0 32rpx;
-	border-radius: 16rpx;
-	box-shadow: 0 2rpx 4rpx 0 rgba(2, 4, 38, 0.05);
-	border-color: #EEEEEE;
-	padding: 50rpx 50rpx;
-	font-size: 30rpx;
-	color: black;
-}
-.petText.data-v-d355acf4{
-	display: flex;
-	flex-direction: column;
-}
-.petText ._span.data-v-d355acf4:first-child{
-	font-size: 50rpx;
-	margin-bottom: 20rpx;
-}
-.petText ._span.data-v-d355acf4:nth-child(1){
-}
-.petPic image.data-v-d355acf4{
-	border-radius: 8rpx;
-	width: 100rpx;
-	height: 100rpx;
-	margin-right: 100rpx;
-}
 .functionArea.data-v-d355acf4{
 	display: flex;
 	flex-direction: column;
 }
-.foodProgress.data-v-d355acf4,
-.waterProgress.data-v-d355acf4
-{
-	height: 50rpx;
-}
+
 

@@ -6,7 +6,7 @@
 				<h3>剩余粮食:{{foodSurplus}}g</h3>
 				<view class="addKg">
 					<h3>添加克数:</h3>
-					<fui-input-number v-model="food" custom></fui-input-number>
+					<fui-input-number v-model="food" custom min="0" max="999"></fui-input-number>
 					g
 				</view>
 				<fui-button text="立即添加" background="#fff" color="#333" borderColor="#333" bold width="200rpx" @click="addFoodNow()"></fui-button>
@@ -31,61 +31,68 @@
 				</view>
 				<view class="foodMaxium">
 					<h3>加粮上限:</h3>
-					<fui-input-number v-model="foodMax" custom ></fui-input-number>
+					<fui-input-number v-model="foodMax" custom min="0" max="999"></fui-input-number>
 					g
 				</view>
 				<fui-button text="定时添加" background="#fff" color="#333" borderColor="#333" bold width="200rpx" @click="addSetTime()"></fui-button>
-			</view>
-		</view>
-		<view class="title"><span>智能加粮</span></view>
-		<view class="functionContent">
-			<view class="addSmart">
-				<view class="addSmartMin">
-					<h3>
-						粮食重量低于
-					</h3>
-					<fui-input-number v-model="foodMin" custom ></fui-input-number>
-					<h3>
-						g自动加粮
-					</h3>
-				</view>
-				<view class="addSmartMax">
-					<h3>自动加粮上限:</h3>
-					<fui-input-number v-model="foodMax" custom ></fui-input-number>
-					g
-				</view>
-				<fui-button text="定时添加" background="#fff" color="#333" borderColor="#333" bold width="200rpx" @click="addSmart()"></fui-button>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	import store from '@/store/index.js'
+import store from '@/store/index.js'
 	export default {
 		data() {
 			return {
-				food:50,
-				foodMin:1,							//智能加粮底线
-				foodMax:1,							//定时和智能加粮上限
-				foodSurplus:store.state.restFood,	//将vuex中的食物剩余量传递到子组件
-				firstTime: '09:00',					//第一次加粮时间
-				secondTime: '21:00'					//第二次加粮时间
+				food:50,												//添加食物克数
+				foodSurplus:store.state.dataStreams.surplus.restFood,	//将vuex中的食物剩余量传递到子组件
+				firstTime: '09:00',										//第一次加粮时间
+				secondTime: '21:00'										//第二次加粮时间
 			}
-		},
-		props:{
-			restFood:Number,
 		},
 		methods:{
 			addFoodNow(){
 				//发送网络请求添加食物
+				uni.request({
+				    url: 'http://api.heclouds.com/cmds?device_id=1055375296',
+					method:'POST',
+				    data: { 'key':'OPEN' },
+				    header: {
+						"api-key":store.state.device.apiKey,
+				        "Content-Type": "application/x-www-form-urlencoded"
+				    }, 	//设置请求头更改为form-data
+				    success: res =>{
+				    	console.log(res);
+				    },
+					fail: err =>{
+						console.log(err);
+					}
+				})
 				this.foodSurplus += this.food
-				store.commit('changeRestFood',this.foodSurplus)
+				store.commit('changeFood',this.foodSurplus)
 				console.log(this.foodSurplus);
 				return this.foodSurplus
 			},
 			addSetTime(){
 				//发送网络请求定时添加食物
+				/*
+				uni.request({
+				    url: 'http://api.heclouds.com/cmds?device_id=1055375296',
+					method:'POST',
+				    data: { 'key':'OPEN' },
+				    header: {
+						"api-key":store.state.device.apiKey,
+				        "Content-Type": "application/x-www-form-urlencoded"
+				    }, 	//设置请求头更改为form-data
+				    success: res =>{
+				    	console.log(res);
+				    },
+					fail: err =>{
+						console.log(err);
+					}
+				})
+				*/
 				//发送网络请求
 				uni.showToast({
 					title:"定时加粮成功",
@@ -94,26 +101,6 @@
 					image:"../../static/images/ali-icon/success.png",
 					mask:true
 				})
-			},
-			addSmart(){
-				if(this.foodMax >= this.foodMin){
-					//发送网络请求
-					uni.showToast({
-						title:"智能加粮成功",
-						duration:2000,
-						icon:'success',
-						image:"../../static/images/ali-icon/success.png",
-						mask:true
-					})
-				}else{
-					uni.showToast({
-						title:"智能加粮失败",
-						duration:2000,
-						icon:'error',
-						image:"../../static/images/ali-icon/error.png",
-						mask:true
-					})
-				}
 			},
 			//第一次喂食时间
 			bindfirstTime(e){

@@ -53,15 +53,6 @@
             
         }
         ,{
-            "path" : "pages/monitor/monitor",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "实时监控",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
             "path" : "pages/addPet/addPet",
             "style" :                                                                                    
             {

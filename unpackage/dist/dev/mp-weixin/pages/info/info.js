@@ -101,7 +101,7 @@ var components
 try {
   components = {
     fuiButton: function () {
-      return __webpack_require__.e(/*! import() | components/firstui/fui-button/fui-button */ "components/firstui/fui-button/fui-button").then(__webpack_require__.bind(null, /*! @/components/firstui/fui-button/fui-button.vue */ 104))
+      return __webpack_require__.e(/*! import() | components/firstui/fui-button/fui-button */ "components/firstui/fui-button/fui-button").then(__webpack_require__.bind(null, /*! @/components/firstui/fui-button/fui-button.vue */ 90))
     },
   }
 } catch (e) {

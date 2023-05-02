@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "fui-card": "/components/firstui/fui-card/fui-card"
+  },
+  "component": true
+}

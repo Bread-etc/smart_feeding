@@ -36,7 +36,6 @@ import store from '@/store/index.js'	//引入store
 							uni.showToast({
 								title:"设备添加成功",
 								duration:2000,
-								icon:'success',
 								image:"../../static/images/ali-icon/success.png",
 								mask:true
 							})
@@ -44,7 +43,6 @@ import store from '@/store/index.js'	//引入store
 							uni.showToast({
 								title:"设备添加失败",
 								duration:2000,
-								icon:'error',
 								image:"../../static/images/ali-icon/error.png",
 								mask:true
 							})

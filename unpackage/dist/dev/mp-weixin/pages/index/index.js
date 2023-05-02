@@ -101,10 +101,10 @@ var components
 try {
   components = {
     deviceConnect: function () {
-      return __webpack_require__.e(/*! import() | components/deviceConnect/deviceConnect */ "components/deviceConnect/deviceConnect").then(__webpack_require__.bind(null, /*! @/components/deviceConnect/deviceConnect.vue */ 90))
+      return __webpack_require__.e(/*! import() | components/deviceConnect/deviceConnect */ "components/deviceConnect/deviceConnect").then(__webpack_require__.bind(null, /*! @/components/deviceConnect/deviceConnect.vue */ 76))
     },
     myDevice: function () {
-      return __webpack_require__.e(/*! import() | components/myDevice/myDevice */ "components/myDevice/myDevice").then(__webpack_require__.bind(null, /*! @/components/myDevice/myDevice.vue */ 97))
+      return __webpack_require__.e(/*! import() | components/myDevice/myDevice */ "components/myDevice/myDevice").then(__webpack_require__.bind(null, /*! @/components/myDevice/myDevice.vue */ 83))
     },
   }
 } catch (e) {

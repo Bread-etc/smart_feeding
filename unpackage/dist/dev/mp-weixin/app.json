@@ -4,8 +4,6 @@
     "pages/info/info",
     "pages/function/function",
     "pages/addFood/addFood",
-    "pages/addWater/addWater",
-    "pages/identify/identify",
     "pages/addPet/addPet"
   ],
   "subPackages": [],

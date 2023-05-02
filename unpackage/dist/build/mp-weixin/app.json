@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/info/info",
+    "pages/function/function",
+    "pages/addFood/addFood",
+    "pages/addPet/addPet"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "铲屎官平台",
+    "navigationBarBackgroundColor": "#333333",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#b8c1c0",
+    "selectedColor": "#5b5b5d",
+    "backgroundColor": "white",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "iconPath": "static/images/ali-icon/home.png",
+        "selectedIconPath": "static/images/ali-icon/home-select.png"
+      },
+      {
+        "text": "功能",
+        "pagePath": "pages/function/function",
+        "iconPath": "static/images/ali-icon/function.png",
+        "selectedIconPath": "static/images/ali-icon/function-select.png"
+      },
+      {
+        "text": "宠物信息",
+        "pagePath": "pages/info/info",
+        "iconPath": "static/images/ali-icon/info.png",
+        "selectedIconPath": "static/images/ali-icon/info-select.png"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "lazyCodeLoading": "requiredComponents"
+}

@@ -23,15 +23,17 @@
 }
 .petText ._span:nth-child(1){
 }
-.petPic image{
-	border-radius: 8rpx;
-	width: 100rpx;
-	height: 100rpx;
-	margin-right: 100rpx;
-}
 .foodProgress,
-.waterProgress
+.waterProgress,
+.tempProgress
 {
 	height: 50rpx;
+}
+.avatar{
+	width: 150rpx; 
+	height: 150rpx; 
+	object-fit: cover; 
+	border-radius: 50%; 
+	display: block;
 }
 

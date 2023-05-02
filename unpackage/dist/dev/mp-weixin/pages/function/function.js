@@ -101,13 +101,13 @@ var components
 try {
   components = {
     fuiDivider: function () {
-      return __webpack_require__.e(/*! import() | components/firstui/fui-divider/fui-divider */ "components/firstui/fui-divider/fui-divider").then(__webpack_require__.bind(null, /*! @/components/firstui/fui-divider/fui-divider.vue */ 111))
+      return __webpack_require__.e(/*! import() | components/firstui/fui-divider/fui-divider */ "components/firstui/fui-divider/fui-divider").then(__webpack_require__.bind(null, /*! @/components/firstui/fui-divider/fui-divider.vue */ 97))
     },
     petCard: function () {
-      return __webpack_require__.e(/*! import() | components/petCard/petCard */ "components/petCard/petCard").then(__webpack_require__.bind(null, /*! @/components/petCard/petCard.vue */ 118))
+      return __webpack_require__.e(/*! import() | components/petCard/petCard */ "components/petCard/petCard").then(__webpack_require__.bind(null, /*! @/components/petCard/petCard.vue */ 104))
     },
     fuiCard: function () {
-      return __webpack_require__.e(/*! import() | components/firstui/fui-card/fui-card */ "components/firstui/fui-card/fui-card").then(__webpack_require__.bind(null, /*! @/components/firstui/fui-card/fui-card.vue */ 125))
+      return __webpack_require__.e(/*! import() | components/firstui/fui-card/fui-card */ "components/firstui/fui-card/fui-card").then(__webpack_require__.bind(null, /*! @/components/firstui/fui-card/fui-card.vue */ 111))
     },
   }
 } catch (e) {
@@ -182,15 +182,18 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 
 //
 //
 //
-//
-//
-//
 var _default = {
   data: function data() {
     return {
       device: _index.default.state.device,
       petPicUrl: _index.default.state.petPicUrl
     };
+  },
+  onShow: function onShow() {
+    // 获取pet-card组件的实例
+    var petCard = this.$refs.petCard;
+    // 调用组件中的更新方法
+    petCard.getPetInfo();
   },
   methods: {
     //向onenet平台获取请求拿到数据流,并存入vuex中
@@ -205,9 +208,11 @@ var _default = {
           'api-key': this.device.apiKey
         },
         success: function success(res) {
-          _index.default.commit('changeTemp', res.data.data[0].current_value); //修改vuex中的温度
-          _index.default.commit('changeFood', res.data.data[1].current_value); //修改vuex中的食物量
+          _index.default.commit('changeState', res.data.data[0].current_value); //修改vuex中的状态
+          _index.default.commit('changeRest', res.data.data[1].current_value); //修改vuex中的超声波
           _index.default.commit('changeWater', res.data.data[2].current_value); //修改vuex中的水量
+          _index.default.commit('changeTemp', res.data.data[3].current_value); //修改vuex中的温度
+          _index.default.commit('changeFood', res.data.data[4].current_value); //修改vuex中的食物量
         }
       });
     },
@@ -216,20 +221,10 @@ var _default = {
       uni.navigateTo({
         url: "/pages/addFood/addFood"
       });
-    },
-    addWater: function addWater() {
-      uni.navigateTo({
-        url: "/pages/addWater/addWater"
-      });
-    },
-    identify: function identify() {
-      uni.navigateTo({
-        url: "/pages/identify/identify"
-      });
     }
   },
   //切换到function页面发送请求
-  onShow: function onShow() {
+  created: function created() {
     this.getDataStreams();
   }
 };

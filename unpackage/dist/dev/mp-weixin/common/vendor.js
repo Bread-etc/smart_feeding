@@ -121,29 +121,7 @@ module.exports = _typeof, module.exports.__esModule = true, module.exports["defa
 
 /***/ }),
 
-/***/ 14:
-/*!************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/toPrimitive.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
-function _toPrimitive(input, hint) {
-  if (_typeof(input) !== "object" || input === null) return input;
-  var prim = input[Symbol.toPrimitive];
-  if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if (_typeof(res) !== "object") return res;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return (hint === "string" ? String : Number)(input);
-}
-module.exports = _toPrimitive, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 149:
+/***/ 135:
 /*!********************************************************************************************************!*\
   !*** C:/Users/Lenovo PC/Desktop/code/HBuilderProjects/智能猫狗喂食机/components/firstui/fui-icon/fui-icon.js ***!
   \********************************************************************************************************/
@@ -323,6 +301,28 @@ var _default = {
   "goods-fill": "\uE80E"
 };
 exports.default = _default;
+
+/***/ }),
+
+/***/ 14:
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toPrimitive.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
+function _toPrimitive(input, hint) {
+  if (_typeof(input) !== "object" || input === null) return input;
+  var prim = input[Symbol.toPrimitive];
+  if (prim !== undefined) {
+    var res = prim.call(input, hint || "default");
+    if (_typeof(res) !== "object") return res;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return (hint === "string" ? String : Number)(input);
+}
+module.exports = _toPrimitive, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
@@ -9770,13 +9770,13 @@ var store = new _vuex.default.Store({
   state: {
     device: {
       //保存关于设备的ID和apikey
-      deviceId: '1055375296',
+      deviceId: '1076689798',
       //设备ID
-      apiKey: "NWcyM=JHQsYGkSJgIjEzQnghAWY=",
+      apiKey: "JlgBre4PLdF2aMprOToM1ARMWgk=",
       //普通连接apikey
       access_key: "zOGTZYEhToBYjKxKUyKlMey5AfGyM44jTQLb2zwzVN0=",
       //安全连接apikey
-      datastream_ids: 'temp,rest,state' //数据流id
+      datastream_ids: 'state,rest,water,temp,Weight' //数据流id
     },
 
     connectBoolean: false,
@@ -9786,15 +9786,15 @@ var store = new _vuex.default.Store({
     },
     dataStreams: {
       //保存数据流中各项指标
-      temp: null,
+      state: 0,
+      rest: 0,
+      temp: 0,
       surplus: {
-        restFood: null,
-        restWater: null
+        food: 0,
+        water: 0
       }
-    },
-    petPicUrl: '' //宠物头像链接
+    }
   },
-
   actions: {
     changeConnectBoolean: function changeConnectBoolean(context, value) {
       context.commit('changeConnectBoolean', value);
@@ -9802,17 +9802,22 @@ var store = new _vuex.default.Store({
     addData: function addData(context, value) {
       context.commit('addData', value);
     },
+    changeState: function changeState(context, value) {
+      context.commit('changeState', value);
+    },
+    changeRest: function changeRest(context, value) {
+      context.commit('changeRest', value);
+    },
     changeTemp: function changeTemp(context, value) {
       context.commit('changeTemp', value);
     },
     changeFood: function changeFood(context, value) {
+      value = 1000 - value;
       context.commit('changeFood', value);
     },
     changeWater: function changeWater(context, value) {
+      value = 1000 - value;
       context.commit('changeWater', value);
-    },
-    petPic: function petPic(context, value) {
-      context.commit('petPic', value);
     }
   },
   mutations: {
@@ -9824,20 +9829,25 @@ var store = new _vuex.default.Store({
     addData: function addData(state, value) {
       state.data = value;
     },
+    //修改状态
+    changeState: function changeState(state, value) {
+      state.dataStreams.state = value;
+    },
+    //修改超声波
+    changeRest: function changeRest(state, value) {
+      state.dataStreams.rest = value;
+    },
     //修改温度
     changeTemp: function changeTemp(state, value) {
       state.dataStreams.temp = value;
     },
     //修改剩余食物
     changeFood: function changeFood(state, value) {
-      state.dataStreams.surplus.restFood = value;
+      state.dataStreams.surplus.food = value;
     },
     //修改剩余水量
     changeWater: function changeWater(state, value) {
-      state.dataStreams.surplus.restWater = value;
-    },
-    petPic: function petPic(state, value) {
-      state.petPicUrl = value;
+      state.dataStreams.surplus.water = value;
     }
   }
 });

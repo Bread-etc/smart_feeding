@@ -35,24 +35,6 @@
             
         }
         ,{
-            "path" : "pages/addWater/addWater",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "定时换水",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/identify/identify",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "宠物智能识别",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
             "path" : "pages/addPet/addPet",
             "style" :                                                                                    
             {

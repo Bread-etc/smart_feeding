@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "精准加粮",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "fui-input-number": "/components/firstui/fui-input-number/fui-input-number",
+    "fui-button": "/components/firstui/fui-button/fui-button"
+  }
+}

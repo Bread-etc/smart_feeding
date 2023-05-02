@@ -1,66 +1,61 @@
 <template>
-	<view class="content">
-		<view class="title"><span>添加宠物</span></view>
-		<view class="functionContent">
-			<form @submit="formSubmit">
-				<uploadPic></uploadPic>
-				<view>
-					<view>宠物名字:</view>
-					<input name="name" placeholder="请输入爱称" />
-				</view>
-				<view>
-					<view>出生年月:</view>
-					<picker name="date" mode="date" :value="date" :start="startDate" :end="endDate" @change="bindDateChange">
-						<view class="uni-input">{{date}}</view>
-					</picker>
-				</view>
-				<button form-type="submit">确认</button>
-			</form>
-		</view>
+  <view class="content">
+	<view class="title"><span>添加宠物</span></view>
+	<view class="functionContent">
+		<uploadPic></uploadPic>
+		<form>
+			<input v-model="petName" placeholder="请输入宠物姓名" />
+			<input v-model="petBirthday" placeholder="请输入宠物生日" />
+			<button @click="submitPetInfo">提交</button>
+		</form>
 	</view>
+  </view>
 </template>
 
 <script>
-	export default {
-		data() {
-			const currentDate = this.getDate({
-				format:true
-			})
-			return {
-				date:currentDate,					//当前时间
+	export default{
+		data(){
+			return{
+				petName:'',
+				petBirthday:'',
 			}
 		},
-		methods: {
-			getDate(type) {
-				const date = new Date();
-				let year = date.getFullYear();
-				let month = date.getMonth() + 1;
-				let day = date.getDate();
-	
-				if (type === 'start') {
-					year = year - 30;				//开始时间（现在时间30年前）
-				} else if (type === 'end') {
-					year = year + 2;				//结束时间（现在时间两年后）
-				}
-				month = month > 9 ? month : '0' + month;
-				day = day > 9 ? day : '0' + day;
-				return `${year}-${month}-${day}`;
+		methods:{
+			submitPetInfo(){
+				// 获取填写的宠物名字和出生日期
+				const petName = this.petName;
+				const petBirthday = this.petBirthday;
+				const openid = uni.getStorageSync('openid')
+				
+				// 发送POST请求到后端服务器
+				uni.request({
+					url:'https://hastur23.top/petinfo',
+					method:'POST',
+					header:{
+						"Content-Type":"application/json",
+					},
+					data:{
+						openid:openid,
+						petName:petName,
+						petBirthday:petBirthday,
+					},
+					success: res=>{
+						// 显示提交成功信息
+						uni.showToast({
+							title:'提交成功',
+							icon:'success',
+						});
+					},
+					fail: err=>{
+						// 显示提交失败信息
+						uni.showToast({
+							title:'提交失败',
+							icon:'error',
+						});
+					},
+				});
 			},
-			bindDateChange(e){
-				this.date = e.detail.value			//更改事件e的value
-			},
-			formSubmit(e){
-				console.log(e);
-			}
-		},
-		computed: {
-			startDate() {
-				return this.getDate('start');
-			},
-			endDate() {
-				return this.getDate('end');
-			}
-		},
+		}
 	}
 </script>
 

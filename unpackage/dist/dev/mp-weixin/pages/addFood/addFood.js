@@ -101,10 +101,10 @@ var components
 try {
   components = {
     fuiInputNumber: function () {
-      return __webpack_require__.e(/*! import() | components/firstui/fui-input-number/fui-input-number */ "components/firstui/fui-input-number/fui-input-number").then(__webpack_require__.bind(null, /*! @/components/firstui/fui-input-number/fui-input-number.vue */ 132))
+      return __webpack_require__.e(/*! import() | components/firstui/fui-input-number/fui-input-number */ "components/firstui/fui-input-number/fui-input-number").then(__webpack_require__.bind(null, /*! @/components/firstui/fui-input-number/fui-input-number.vue */ 118))
     },
     fuiButton: function () {
-      return __webpack_require__.e(/*! import() | components/firstui/fui-button/fui-button */ "components/firstui/fui-button/fui-button").then(__webpack_require__.bind(null, /*! @/components/firstui/fui-button/fui-button.vue */ 104))
+      return __webpack_require__.e(/*! import() | components/firstui/fui-button/fui-button */ "components/firstui/fui-button/fui-button").then(__webpack_require__.bind(null, /*! @/components/firstui/fui-button/fui-button.vue */ 90))
     },
   }
 } catch (e) {
@@ -187,105 +187,57 @@ var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _default = {
   data: function data() {
     return {
-      food: 50,
+      food: 100,
       //添加食物克数
-      foodSurplus: _index.default.state.dataStreams.surplus.restFood,
+      foodSurplus: parseInt(_index.default.state.dataStreams.surplus.food),
       //将vuex中的食物剩余量传递到子组件
-      firstTime: '09:00',
-      //第一次加粮时间
-      secondTime: '21:00' //第二次加粮时间
+      reqData: 1
     };
   },
-
   methods: {
+    addAlert: function addAlert() {
+      if (this.foodSurplus <= 20) {
+        uni.showToast({
+          title: '请及时换粮',
+          duration: 2000,
+          icon: 'none',
+          mask: true
+        });
+      }
+    },
     addFoodNow: function addFoodNow() {
+      var _this = this;
+      this.reqData = this.food / 100;
       //发送网络请求添加食物
       uni.request({
-        url: 'http://api.heclouds.com/cmds?device_id=1055375296',
+        url: 'http://api.heclouds.com/cmds?device_id=1076689798',
         method: 'POST',
         data: {
-          'key': 'OPEN'
+          "Servo": this.reqData
         },
         header: {
           "api-key": _index.default.state.device.apiKey,
-          "Content-Type": "application/x-www-form-urlencoded"
+          "Content-Type": "application/json"
         },
-        //设置请求头更改为form-data
+        //设置请求头更改为json
         success: function success(res) {
-          console.log(res);
+          console.log(_this.reqData);
+          console.log('添加成功');
+          _this.foodSurplus += _this.food;
+          _index.default.commit('changeFood', _this.foodSurplus);
+          console.log(_this.foodSurplus);
         },
         fail: function fail(err) {
           console.log(err);
         }
       });
-      this.foodSurplus += this.food;
-      _index.default.commit('changeFood', this.foodSurplus);
-      console.log(this.foodSurplus);
-      return this.foodSurplus;
-    },
-    addSetTime: function addSetTime() {
-      //发送网络请求定时添加食物
-      /*
-      uni.request({
-          url: 'http://api.heclouds.com/cmds?device_id=1055375296',
-      	method:'POST',
-          data: { 'key':'OPEN' },
-          header: {
-      		"api-key":store.state.device.apiKey,
-              "Content-Type": "application/x-www-form-urlencoded"
-          }, 	//设置请求头更改为form-data
-          success: res =>{
-          	console.log(res);
-          },
-      	fail: err =>{
-      		console.log(err);
-      	}
-      })
-      */
-      //发送网络请求
-      uni.showToast({
-        title: "定时加粮成功",
-        duration: 2000,
-        icon: 'success',
-        image: "../../static/images/ali-icon/success.png",
-        mask: true
-      });
-    },
-    //第一次喂食时间
-    bindfirstTime: function bindfirstTime(e) {
-      this.firstTime = e.target.value;
-    },
-    //第二次喂食时间
-    bindsecondTime: function bindsecondTime(e) {
-      this.secondTime = e.target.value;
     }
+  },
+  onShow: function onShow() {
+    this.addAlert();
   }
 };
 exports.default = _default;

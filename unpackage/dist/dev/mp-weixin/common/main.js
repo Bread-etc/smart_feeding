@@ -106,74 +106,77 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _default = {
   globalData: {
-    token: null
+    token: ''
   },
   methods: {
     //实现微信无感登录，仅用于实现保持用户登录态
     login: function login() {
       var _this = this;
       uni.login({
+        provider: 'weixin',
+        onlyAuthorize: true,
         success: function success(res) {
+          console.log(res.code);
           uni.request({
-            url: 'http://127.0.0.1:3000/login',
+            url: 'https://hastur23.top/login',
             method: 'POST',
+            header: {
+              'Content-type': 'application/x-www-form-urlencoded'
+            },
             data: {
               code: res.code
             },
             success: function success(res) {
-              //将请求成功的token打印
-              console.log('token:', res.data.token);
-              //将token保存为全局数据（多页面使用->全局globalData)
-              _this.globalData.token = res.data.token;
-              //将token保存在数据缓存中(下次登录无需重新获取token)
-              uni.setStorage({
-                key: 'token',
-                data: res.data.token
-              });
+              if (res.data.token) {
+                uni.setStorageSync('token', res.data.token);
+                uni.setStorageSync('openid', res.data.openid);
+                _this.globalData.token = res.data.token;
+                _this.checkLogin();
+              }
+            },
+            fail: function fail(err) {
+              console.log(err);
             }
           });
         }
       });
     },
-    checkLogin: function checkLogin(callback) {
-      var token = this.globalData.token;
-      if (!token) {
-        //从缓存中获取token
-        token = uni.getStorageSync('token');
-        if (token) {
-          this.globalData.token = token;
-        } else {
-          callback({
-            is_login: false
-          });
-        }
+    checkLogin: function checkLogin() {
+      var _this2 = this;
+      var token = uni.getStorageSync('token');
+      if (token) {
+        // token存在，发送请求到checkLogin路由进行校验
+        uni.request({
+          url: 'https://hastur23.top/checklogin',
+          method: 'POST',
+          data: {
+            token: token
+          },
+          header: {
+            'Content-type': 'application/x-www-form-urlencoded'
+          },
+          success: function success(res) {
+            if (res.data.is_login) {
+              // token有效，可以访问页面
+              console.log('登录状态有效');
+            } else {
+              // token无效，需要重新登录获取新token
+              console.log('登录状态失效');
+              _this2.login();
+            }
+          },
+          fail: function fail(err) {
+            console.log(err);
+          }
+        });
+      } else {
+        // 无token，需要重新登陆获取新token
+        this.login();
       }
-      //发送request请求校验是否token存在
-      uni.request({
-        url: 'http://127.0.0.1:3000/checklogin',
-        data: {
-          token: token
-        },
-        success: function success(res) {
-          console.log(res);
-          callback({
-            is_login: res.data.is_login
-          });
-        }
-      });
     }
   },
   onLaunch: function onLaunch() {
-    var _this2 = this;
-    //检测用户是否登录(无感登录)
-    this.checkLogin(function (res) {
-      console.log('is_login:', res.is_login); //is_login的值为undefined时返回
-      //未登录-->login()
-      if (!res.is_login) {
-        //调用login()
-        _this2.login();
-      }
-    });
+    this.checkLogin();
   },
   onShow: function onShow() {},
   onHide: function onHide() {}

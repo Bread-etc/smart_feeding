@@ -1,0 +1,9 @@
+.addNow.data-v-4e9f96c2,
+.addSetTime.data-v-4e9f96c2,
+.addSmart.data-v-4e9f96c2{display:flex;flex-direction:column;align-items:flex-start;font-size:40rpx}.fui-input__number.data-v-4e9f96c2{display:inline-flex;flex-direction:row;align-items:baseline}.addNow fui-button.data-v-4e9f96c2,
+.addSetTime fui-button.data-v-4e9f96c2,
+.addSmart fui-button.data-v-4e9f96c2{margin-top:20rpx}.setTime.data-v-4e9f96c2,
+.foodMaxium.data-v-4e9f96c2,
+.addKg.data-v-4e9f96c2,
+.addSmartMin.data-v-4e9f96c2,
+.addSmartMax.data-v-4e9f96c2{display:inline-flex}.item.data-v-4e9f96c2{display:flex;flex-direction:row;margin-bottom:20rpx}.NumInput.data-v-4e9f96c2{font-size:20px;display:inline-flex;flex-direction:row;align-items:flex-start;margin-bottom:10rpx}

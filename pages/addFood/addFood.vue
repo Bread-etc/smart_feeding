@@ -22,7 +22,7 @@ import store from '@/store/index.js'
 		data() {
 			return {
 				food:100,														//添加食物克数
-				foodSurplus:parseInt(store.state.dataStreams.surplus.food),		//将vuex中的食物剩余量传递到子组件
+				foodSurplus:300,												//将vuex中的食物剩余量传递到子组件
 				reqData:1
 			}
 		},
@@ -41,7 +41,7 @@ import store from '@/store/index.js'
 				this.reqData = this.food / 100
 				//发送网络请求添加食物
 				uni.request({
-				    url: 'http://api.heclouds.com/cmds?device_id=1076689798',
+				    url: 'https://api.heclouds.com/cmds?device_id=1076689798',
 					method:'POST',
 				    data: { "Servo":this.reqData },
 				    header: {
@@ -51,7 +51,7 @@ import store from '@/store/index.js'
 				    success: res =>{
 						console.log(this.reqData);
 						console.log('添加成功');
-						this.foodSurplus += this.food
+						this.foodSurplus -= this.food
 						store.commit('changeFood',this.foodSurplus)
 						console.log(this.foodSurplus);
 				    },

@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "主子档案",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "fui-button": "/components/firstui/fui-button/fui-button"
-  }
-}

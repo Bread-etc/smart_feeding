@@ -24,7 +24,7 @@ import store from '@/store/index.js'	//引入store
 		methods:{
 			addDevice(){
 				uni.request({
-					url:`http://api.heclouds.com/devices/${this.device.deviceId}`,		//查询设备状态url
+					url:`https://api.heclouds.com/devices/${this.device.deviceId}`,		//查询设备状态url
 					header:{
 						'api-key':this.device.apiKey
 					},

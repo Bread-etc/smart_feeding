@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "首页",
-  "usingComponents": {
-    "device-connect": "/components/deviceConnect/deviceConnect",
-    "my-device": "/components/myDevice/myDevice"
-  }
-}

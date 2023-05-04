@@ -1,1 +1,0 @@
-<view><block wx:if="{{imageUrl}}"><view><image src="{{imageUrl}}" mode="aspectFit"></image></view></block><view><button data-event-opts="{{[['tap',[['chooseImage',['$event']]]]]}}" bindtap="__e">选择图片</button><button data-event-opts="{{[['tap',[['uploadImage',['$event']]]]]}}" bindtap="__e">上传图片</button></view></view>

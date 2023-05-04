@@ -29,7 +29,7 @@
 				
 				// 发送POST请求到后端服务器
 				uni.request({
-					url:'https://hastur23.top/petinfo',
+					url:'http://localhost:3000/petinfo',
 					method:'POST',
 					header:{
 						"Content-Type":"application/json",

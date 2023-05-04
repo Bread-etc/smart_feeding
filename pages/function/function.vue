@@ -27,7 +27,7 @@
 			//向onenet平台获取请求拿到数据流,并存入vuex中
 			getDataStreams(){
 				uni.request({
-					url:`http://api.heclouds.com/devices/${this.device.deviceId}/datastreams`,
+					url:`https://api.heclouds.com/devices/${this.device.deviceId}/datastreams`,
 					method:'GET',
 					data:{
 						datastream_ids:this.device.datastream_ids
@@ -36,11 +36,12 @@
 						'api-key':this.device.apiKey
 					},
 					success: res =>{
-						store.commit('changeState',res.data.data[0].current_value)		//修改vuex中的状态
-						store.commit('changeRest',res.data.data[1].current_value)		//修改vuex中的超声波
-						store.commit('changeWater',res.data.data[2].current_value)		//修改vuex中的水量
-						store.commit('changeTemp',res.data.data[3].current_value)		//修改vuex中的温度
-						store.commit('changeFood',res.data.data[4].current_value)		//修改vuex中的食物量
+						console.log(res.data.data);
+						store.commit('changeState',res.data.data[0].current_value)					//修改vuex中的状态
+						store.commit('changeRest',res.data.data[1].current_value)					//修改vuex中的超声波
+						store.commit('changeWater',res.data.data[2].current_value)					//修改vuex中的水量
+						store.commit('changeTemp',res.data.data[3].current_value)					//修改vuex中的温度
+						store.commit('changeFood',300-parseInt(res.data.data[4].current_value))		//修改vuex中的食物量
 					}
 				})
 			},

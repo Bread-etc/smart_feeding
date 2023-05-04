@@ -11,20 +11,20 @@
 		</view>
 		<fui-card src="../../../static/images/ali-icon/foodShow.png" title="余粮显示" >
 			<view class="foodProgress">
-				<progress :percent="restFood" active="true"
+				<progress :percent="percentageFood" active="true"
 					activeColor="#5b5b5d" stroke-width="3"
 					style="margin-left: 30rpx;margin-right: 30rpx;"
-					show-info="true"
+					show-info="true" :max="max"
 				>
 				</progress>
 			</view>
 		</fui-card>
 		<fui-card src="../../../static/images/ali-icon/chongwuguantou.png" title="水量显示" >
 			<view class="waterProgress">
-				<progress :percent="restWater" active="true"
+				<progress :percent="percentageWater" active="true"
 					activeColor="#5b5b5d" stroke-width="3"
 					style="margin-left: 30rpx;margin-right: 30rpx;"
-					show-info="true"
+					show-info="true" :max="max"
 				>
 				</progress>
 			</view>
@@ -51,6 +51,7 @@
 				timer:'',
 				restFood:store.state.dataStreams.surplus.food,
 				restWater:store.state.dataStreams.surplus.water,
+				max:300,
 				temperature:store.state.dataStreams.temp,
 				petName:'',
 				petBirthday:'',
@@ -102,7 +103,19 @@
 						console.log(err);
 					}
 				})
-			}
+			},
+		},
+		computed: {
+		    percentageFood: {
+		        get() {
+		            return Math.floor(this.restFood / this.max * 100);
+		        }
+		    },
+		    percentageWater: {
+		        get() {
+		            return Math.floor(this.restWater / this.max * 100);
+		        }
+		    }
 		},
 		filters: {
 		    formatDate(value) {
